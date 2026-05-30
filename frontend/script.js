@@ -1,5 +1,4 @@
-const API = "http://localhost:8000";
-
+const API = "https://mediquery-rag.onrender.com";
 const uploadArea = document.getElementById('uploadArea');
 const pdfFile = document.getElementById('pdfFile');
 
