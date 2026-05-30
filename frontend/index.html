@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediQuery RAG</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">🏥</div>
+            <h1>MediQuery</h1>
+            <p>AI-Powered Medical Document Q&A</p>
+        </header>
+
+        <div class="card">
+            <h2>Upload Document</h2>
+            <div class="upload-area" id="uploadArea">
+                <span>📄 Drop PDF here or click to upload</span>
+                <input type="file" id="pdfFile" accept=".pdf" hidden />
+            </div>
+            <button id="uploadBtn" onclick="uploadPDF()">Process PDF</button>
+            <p id="uploadStatus"></p>
+        </div>
+
+        <div class="card" id="qaSection" style="display:none">
+            <h2>Ask a Question</h2>
+            <div id="chatBox"></div>
+            <div class="input-row">
+                <input type="text" id="questionInput" placeholder="Ask anything about the document..." />
+                <button onclick="askQuestion()">Ask</button>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
