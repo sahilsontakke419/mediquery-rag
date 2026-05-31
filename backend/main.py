@@ -8,10 +8,7 @@ from langchain_groq import ChatGroq
 from langchain_core.prompts import PromptTemplate
 from langchain_core.runnables import RunnablePassthrough
 from langchain_core.output_parsers import StrOutputParser
-from dotenv import load_dotenv
 import tempfile, os, uvicorn
-
-load_dotenv()
 
 app = FastAPI()
 
@@ -23,7 +20,6 @@ app.add_middleware(
 )
 
 vectorstore = None
-GROQ_API_KEY = os.environ.get("GROQ_API_KEY")
 
 @app.post("/upload")
 async def upload_pdf(file: UploadFile = File(...)):
@@ -44,12 +40,13 @@ async def ask_question(question: str = Form(...)):
     global vectorstore
     if not vectorstore:
         return {"answer": "Please upload a PDF first."}
-    if not GROQ_API_KEY:
+    api_key = os.environ.get("GROQ_API_KEY")
+    if not api_key:
         return {"answer": "API key not configured on server."}
     llm = ChatGroq(
         model_name="llama-3.1-8b-instant",
         temperature=0.2,
-        api_key=GROQ_API_KEY
+        api_key=api_key
     )
     prompt = PromptTemplate.from_template(
         "Use the context below to answer the question.\n"
